@@ -142,7 +142,7 @@ router.get('/search', async (req, res) => {
   }
 });
 
-router.get('/all', async (req, res) => {
+router.get('/all/status', async (req, res) => {
   try {
     const { status } = req.query; // ?status=Published or ?status=Unpublished
     let filter = {};

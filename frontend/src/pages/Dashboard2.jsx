@@ -1,8 +1,8 @@
 import Sidebar from "../components/Sidebar";
 import Navbar1 from "../components/Navbar1";
-import Products from "./Products";
+import ProductCard from "./ProductCard";
 import { Outlet } from "react-router-dom";
-export default function Dashboard1() {
+export default function Dashboard2() {
   return (
     <div className="flex w-[1440px] h-[1024px] bg-gray-100">
 
@@ -16,7 +16,7 @@ export default function Dashboard1() {
         <Navbar1 />
 
         {/* Page Content */}
-        <Products />
+        <ProductCard />
 
       </div>
 

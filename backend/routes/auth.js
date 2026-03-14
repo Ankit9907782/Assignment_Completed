@@ -3,8 +3,12 @@ import express from 'express';
 import User from '../models/User.js';
 import { generateOTP } from '../utils/otp.js';
 import nodemailer from 'nodemailer';
+import { Resend } from "resend";
+import dotenv from 'dotenv';
 
+dotenv.config();
 const router = express.Router();
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Send OTP to Email
 router.post('/send-otp', async (req, res) => {
@@ -24,22 +28,14 @@ router.post('/send-otp', async (req, res) => {
   }
 
   // Send email (example with Gmail, use environment variables in production)
-  const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS
-    }
-  });
+ await resend.emails.send({
+      from: "The website <onboarding@resend.dev>", // your verified email
+      to: email,
+      subject: "Your OTP Code",
+      html: `<p>Your OTP is <strong>${otp}</strong>. It expires in 5 minutes.</p>`
+    });
 
-  await transporter.sendMail({
-    from: process.env.EMAIL_USER,
-    to: email,
-    subject: 'Your OTP Code',
-    text: `Your OTP is ${otp}`
-  });
-
-  res.json({ message: 'OTP sent to email' });
+    res.json({ message: "OTP sent to email" });
 });
 
 // Verify OTP

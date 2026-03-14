@@ -1,44 +1,64 @@
-export default function ProductsPage() {
-  return (
-    <div className="flex-1 bg-[#F5F6FA] p-10 flex flex-col">
+import { useState } from "react";
+import AddProduct from "./AddProduct";
 
-      {/* Page Header */}
-      {/* <div className="flex items-center mb-10">
-        <span className="text-gray-400 mr-2">🔒</span>
-        <h1 className="text-gray-700 font-medium">Products</h1>
-      </div> */}
+export default function ProductsPage() {
+
+  const [open, setOpen] = useState(false);
+
+  return (
+
+    <div className="flex-1 bg-[#F5F6FA] p-10 flex flex-col relative">
 
       {/* Empty State */}
-      <div className="flex flex-col items-center justify-center flex-1 text-center">
+      <div className="flex flex-col items-center justify-center flex-1">
 
-        {/* Icon */}
-        <div className="text-[#0F1C7A] text-5xl mb-6">
+        <div className="w-[335px] h-[254px] flex flex-col items-center gap-[24px]">
+
+          {/* Image */}
           <img
-          src="/imag3.png"
-          alt="profile"
-          className="w-[100px] h-[100px]  object-cover"
-        />
+            src="/imag3.png"
+            alt="icon"
+            className="w-[100px] h-[100px]"
+          />
+
+          {/* Text Block */}
+          <div className="w-[335px] h-[66px] flex flex-col gap-[16px] items-center">
+
+            <h2 className="text-[16px] font-semibold text-[#344054] text-center">
+              Feels a little empty over here...
+            </h2>
+
+            <p className="text-[14px] leading-[16px] text-center text-[#98A2B3] font-normal">
+              You can create products without connecting store
+              <br />
+              you can add products to store anytime
+            </p>
+
+          </div>
+
+          {/* Button */}
+          <button
+            onClick={() => setOpen(true)}
+            className="w-[315px] h-[40px] rounded-[8px] text-white
+            bg-[linear-gradient(180deg,#000FB4_13.75%,#4050FF_135%)]
+            hover:opacity-90 flex items-center justify-center"
+          >
+            Add your Products
+          </button>
+
         </div>
 
-        {/* Title */}
-        <h2 className="text-lg font-semibold text-gray-700 mb-2">
-          Feels a little empty over here...
-        </h2>
-
-        {/* Description */}
-        <p className="text-gray-400 text-sm mb-6">
-          You can create products without connecting store
-          <br />
-          you can add products to store anytime
-        </p>
-
-        {/* Button */}
-        <button className="px-10 py-3 rounded-lg text-white
-        bg-gradient-to-r from-blue-600 to-blue-800 hover:opacity-90">
-          Add your Products
-        </button>
-
       </div>
+
+      {/* Modal */}
+      {open && (
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 
+flex justify-center items-start overflow-y-auto pt-10">
+
+          <AddProduct closeModal={() => setOpen(false)} />
+
+        </div>
+      )}
 
     </div>
   );

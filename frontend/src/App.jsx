@@ -5,7 +5,9 @@ import Login from "./pages/Login";
 import Verify from "./pages/Verify";
 import Dashboard from "./pages/Dashboard";
 import Dashboard1 from "./pages/Dashboard1";
-import Home from "./pages/Home";
+import Dashboard2 from "./pages/Dashboard2";
+
+import ProductManager from "./pages/ProductManager";
 
 function App() {
   return (
@@ -21,8 +23,12 @@ function App() {
 
         {/* Dashboard */}
         <Route path="/dashboard" element={<Dashboard />} />
-         <Route index element={<Home />} />
-         <Route path="products" element={<Dashboard1 />} />
+         {/* <Route index element={<Home />} /> */}
+         <Route path="/products" element={<Dashboard1 />} />
+         <Route path="/productsid" element={<ProductManager />} />
+
+         <Route path="/productcard" element={<Dashboard2 />} />
+
       </Routes>
 
     </BrowserRouter>

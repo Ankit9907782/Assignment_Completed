@@ -1,7 +1,16 @@
+
 // src/App.jsx
 import { useState } from "react";
+import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function Verify() {
+
+const navigate = useNavigate();
+const location = useLocation();
+
+const email = location.state?.email;
+
 const [otp, setOtp] = useState(["", "", "", "", "", ""]);
 
   const handleChange = (value, index) => {
@@ -11,10 +20,39 @@ const [otp, setOtp] = useState(["", "", "", "", "", ""]);
     newOtp[index] = value;
     setOtp(newOtp);
 
-    // move to next box
     if (value && index < 5) {
       document.getElementById(`otp-${index + 1}`).focus();
     }
+  };
+
+  const verifyOtp = async () => {
+
+    const finalOtp = otp.join("");
+
+    if (finalOtp.length !== 6) {
+      alert("Enter complete OTP");
+      return;
+    }
+
+    try {
+
+      await axios.post(
+        "http://localhost:5000/api/auth/verify-otp",
+        {
+          email: email,
+          otp: finalOtp
+        }
+      );
+     
+      // redirect to dashboard
+      navigate("/dashboard");
+
+    } catch (err) {
+
+      alert("Invalid OTP");
+
+    }
+
   };
 
   return (
@@ -23,13 +61,10 @@ const [otp, setOtp] = useState(["", "", "", "", "", ""]);
 
   <div className="w-[718px] h-[960px] m-[32px] rounded-[32px] overflow-hidden relative">
 
-  {/* Background Pattern */}
   <div className="absolute inset-0 bg-[url('/imag.png')] bg-cover bg-center z-0"></div>
 
-  {/* Gradient Overlay */}
   <div className="absolute inset-0 bg-[linear-gradient(180deg,#010860_0%,#002283_19.23%,#734AA3_38.46%,#E7959C_57.21%,#E4A182_76.92%,#BF3613_100%)] opacity-60 z-10"></div>
 
-  {/* Center Runner Card */}
   <div className="absolute flex flex-col 
 w-[312px] h-[480px] 
 top-[240px] left-[189px] 
@@ -53,21 +88,18 @@ overflow-hidden ">
 
 
 
-      {/* Right Section: Login Card */}
       <div className="relative w-[718px] h-[1024px] m-[32px] bg-white  flex flex-col items-center">
-  {/* Title */}
+
   <h1 className="mt-[202px] font-bold text-[24px] leading-[29px] w-[363px] text-center">
     Login to your Productr Account
   </h1>
 
-  {/* Form */}
 <div className="absolute flex flex-col gap-2 w-[376px] top-[271px] left-[171px]">
-  {/* Label */}
+
   <p className="font-medium text-[14px] leading-[14px] tracking-normal text-black">
     Email or Phone number
   </p>
 
-  {/* Input */}
   <div className="flex gap-4 mb-8">
         {otp.map((digit, index) => (
           <input
@@ -82,18 +114,19 @@ overflow-hidden ">
         ))}
       </div>
 
-  {/* Button */}
-<button className="w-[376px] h-[40px] bg-[#071074] text-white rounded-lg hover:bg-[#0d148f] transition">
+<button
+onClick={verifyOtp}
+className="w-[376px] h-[40px] bg-[#071074] text-white rounded-lg hover:bg-[#0d148f] transition">
         Enter your OTP
       </button>
 
-      {/* Resend text */}
       <p className="mt-6 text-gray-400 text-center">
         Didn’t recieve OTP ?{" "}
         <span className="text-blue-600 font-medium cursor-pointer">
           Resend in 20s
         </span>
       </p>
+
 </div>
 
  
@@ -103,3 +136,4 @@ overflow-hidden ">
 }
 
 export default Verify;
+
