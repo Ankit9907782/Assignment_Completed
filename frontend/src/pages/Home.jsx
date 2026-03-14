@@ -14,7 +14,7 @@ function Home() {
     try {
 
       const res = await axios.get(
-        `http://localhost:5000/api/product/all/status?status=${status}`
+        `https://assignment-completed.onrender.com/api/product/all/status?status=${status}`
       );
 
       setProducts(res.data);
@@ -33,7 +33,7 @@ function Home() {
     try {
 
       await axios.delete(
-        `http://localhost:5000/api/product/delete/${id}`
+        `https://assignment-completed.onrender.com/api/product/delete/${id}`
       );
 
       setDeleteProduct(null);
@@ -119,7 +119,7 @@ function Home() {
 
                 {p.images && p.images.length > 0 && (
                   <img
-                    src={`http://localhost:5000${p.images[0]}`}
+                    src={`https://assignment-completed.onrender.com${p.images[0]}`}
                     alt="product"
                     className="h-[120px] object-contain"
                   />
@@ -184,7 +184,7 @@ function Home() {
                 onClick={async () => {
                   try {
                     await axios.patch(
-                      `http://localhost:5000/api/product/toggle-status/${p._id}`
+                      `https://assignment-completed.onrender.com/api/product/toggle-status/${p._id}`
                     );
                     fetchProducts();
                   } catch (err) {

@@ -7,7 +7,7 @@ export default function DeleteProduct({ product, closeModal, refresh }) {
     try {
 
       await axios.delete(
-        `http://localhost:5000/api/product/delete/${product._id}`
+        `https://assignment-completed.onrender.com/api/product/delete/${product._id}`
       );
 
       refresh(); // reload products

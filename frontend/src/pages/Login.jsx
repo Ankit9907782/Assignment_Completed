@@ -21,7 +21,7 @@ function Login() {
     try {
 
       await axios.post(
-        "http://localhost:5000/api/auth/send-otp",
+        "https://assignment-completed.onrender.com/api/auth/send-otp",
         { email: emailOrPhone }
       );
       

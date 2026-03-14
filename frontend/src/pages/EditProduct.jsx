@@ -33,7 +33,7 @@ export default function EditProduct({ product, closeModal }) {
 
       if (product.images) {
         const existingImages = product.images.map(
-          (img) => `http://localhost:5000${img}`
+          (img) => `https://assignment-completed.onrender.com${img}`
         );
         setImages(existingImages);
       }
@@ -81,7 +81,7 @@ export default function EditProduct({ product, closeModal }) {
       });
 
       await axios.put(
-        `http://localhost:5000/api/product/edit/${product._id}`,
+        `https://assignment-completed.onrender.com/api/product/edit/${product._id}`,
         data,
         { headers: { "Content-Type": "multipart/form-data" } }
       );

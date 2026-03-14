@@ -62,7 +62,7 @@ export default function AddProduct({ closeModal,showToast}) {
       });
 
       const res = await axios.post(
-        "http://localhost:5000/api/product/create",
+        "https://assignment-completed.onrender.com/api/product/create",
         data,
         { headers: { "Content-Type": "multipart/form-data" } }
       );

@@ -11,7 +11,7 @@ export default function ProductManager() {
   // 🔹 Load products from backend
   const fetchProducts = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/product/all");
+      const res = await axios.get("https://assignment-completed.onrender.com/api/product/all");
       setProducts(res.data);
     } catch (err) {
       console.log(err);
@@ -80,7 +80,7 @@ export default function ProductManager() {
 
               {p.images && p.images.length > 0 && (
                 <img
-                  src={`http://localhost:5000${p.images[0]}`}
+                  src={`https://assignment-completed.onrender.com${p.images[0]}`}
                   alt={p.name}
                   className="w-20 h-20 object-cover rounded"
                 />

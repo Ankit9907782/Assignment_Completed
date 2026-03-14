@@ -37,7 +37,7 @@ const [otp, setOtp] = useState(["", "", "", "", "", ""]);
     try {
 
       await axios.post(
-        "http://localhost:5000/api/auth/verify-otp",
+        "https://assignment-completed.onrender.com/api/auth/verify-otp",
         {
           email: email,
           otp: finalOtp
