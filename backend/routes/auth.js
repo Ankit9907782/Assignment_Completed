@@ -103,7 +103,7 @@ router.post('/send-otp', async (req, res) => {
 
     // ✅ Send email via Brevo
     await transporter.sendMail({
-      from: `"OTP Service" <${process.env.BREVO_LOGIN}>`,
+      from: `"OTP Service <ankitghosh200416@gmail.com>",
       to: email,
       subject: "Your OTP Code",
       html: `<h2>Your OTP is ${otp}</h2><p>It expires in 5 minutes.</p>`,
